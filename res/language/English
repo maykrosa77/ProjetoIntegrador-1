@@ -1,0 +1,9 @@
+# Testing language file 
+
+# Define amount of text file(last id + 1)
+qtd = 2
+
+# Define Text
+# Necessary use blank space before and after equal sign( = )
+0 = First text
+1 = second text

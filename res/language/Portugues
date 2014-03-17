@@ -1,0 +1,8 @@
+# Testando arquivo de idioma
+
+# Definindo ultimo id de texto do arquivo
+qtd = 2
+
+# Definindo textos
+0 = Primeiro texto
+1 = Segundo texto
