@@ -1,6 +1,7 @@
 package Scenes;
 
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -21,6 +22,7 @@ public abstract class Scene {
     public int height;
     
     public Font font;
+    public FontMetrics fontMetrics;
     
     public abstract void keyPressed(KeyEvent e);
     public abstract void keyReleased(KeyEvent e);

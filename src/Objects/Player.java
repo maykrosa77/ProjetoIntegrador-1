@@ -3,7 +3,6 @@ package Objects;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import Manager.Image;
-import Objects.Units.Archer;
 import Objects.Units.Soldier;
 import ProjetoIntegrador.StaticContent;
 import Scenes.GamePlayScene;
@@ -66,9 +65,6 @@ public class Player extends Sprite{
 		switch (i) {
 		case 0:
 			squads.get(squads.size()-1).units.add(new Soldier(Image.soldier, x, y));
-			break;
-		case 1:
-			squads.get(squads.size()-1).units.add(new Archer(Image.archer, x, y));
 			break;
 		}
 		

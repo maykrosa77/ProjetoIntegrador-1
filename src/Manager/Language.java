@@ -6,9 +6,11 @@ import java.io.IOException;
 
 public class Language {
     
-    public final static String ENGLISH = "English";
-    public final static String PORTUGUES = "Portugues";
+    public final static String ENGLISH = "english";
+    public final static String PORTUGUES = "portugues";
+    
     public static String[] texts;
+    public static String currentLanguage;
     
     public static boolean loadLanguage(String language){
         FileReader fileReader;
@@ -16,7 +18,7 @@ public class Language {
         String line;
         
         try{
-            fileReader = new FileReader("res/language/"+language);
+            fileReader = new FileReader("res/language/"+language+".txt");
             bufferedReader = new BufferedReader(fileReader);
 //            
             while((line = bufferedReader.readLine())!=null){
@@ -46,6 +48,8 @@ public class Language {
             
             bufferedReader.close();
             fileReader.close();
+            
+            currentLanguage = language;
             return true;
         }catch(IOException e){
             return false;

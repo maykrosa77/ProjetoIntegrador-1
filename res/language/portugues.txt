@@ -1,0 +1,9 @@
+# Testando arquivo de idioma
+
+# Definindo ultimo id de texto do arquivo
+qtd = 3
+
+# Definindo textos
+0 = INICIAR JOGO
+1 = PLANO
+2 = PRONTO

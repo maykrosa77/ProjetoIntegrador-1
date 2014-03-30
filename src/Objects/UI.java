@@ -1,6 +1,7 @@
 package Objects;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
@@ -48,6 +49,9 @@ public class UI extends Sprite{
 	@Override
 	public void render(Graphics2D graphics) {
     	/*Gold, points*/
+        parent.font = new Font("PAPYRUS", Font.BOLD, 12);
+        graphics.setFont( parent.font);
+        
         graphics.setColor(Color.orange);
         graphics.drawString(""+(int)player.gold, 20, 20);
         graphics.drawString(""+(int)player.points, 20, 40);

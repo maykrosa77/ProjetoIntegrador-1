@@ -36,19 +36,19 @@ public class GamePlayScene extends Scene{
     * @param int width of screen
     * @param int height of screen
     */
-    public GamePlayScene(GamePanel gamePanel, int width, int height){
+    public GamePlayScene(GamePanel gamePanel){
        this.gamePanel = gamePanel;
-       this.width = width;
-       this.height = height;
+       this.width  = GamePanel.widthScreen;
+       this.height = GamePanel.heightScreen;
        
        this.font = gamePanel.font;
        
        /*Positions bases and battlefields in map.*/
        int[] cards = new int[6];
        cards[0] = 0;
-       cards[1] = 1;
-       cards[2] = 1;
-       cards[3] = 1;
+       cards[1] = 0;
+       cards[2] = 0;
+       cards[3] = 0;
        cards[4] = 0;
        cards[5] = 0;
        player = new Player(cards, this);
@@ -114,7 +114,7 @@ public class GamePlayScene extends Scene{
     		/*Click over cards to create news units*/
 			for(int i=0; i<ui.rectCards.length; i++){
 				if(ui.rectCards[i].contains(e.getPoint())){
-					player.createUnit(player.cards[i], random.nextInt((int)(width*0.1f))+(int)(width*0.45f), (int)(height*0.75f));
+					player.createUnit(player.cards[i], random.nextInt((int)(width*0.1f))+(int)(width*0.45f), (int)(height*0.85f));
 				}
 			}
 			

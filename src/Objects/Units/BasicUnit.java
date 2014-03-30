@@ -14,6 +14,12 @@ public class BasicUnit extends Sprite{
 	public int battlefieldY;
 	
 	protected BufferedImage image;
+	protected int numberAnimations;
+	protected int numberFrames;
+	protected int currentAnimation;
+	protected int currentFrame;
+	protected int timeBetweenFrame;
+	protected int timerAnimation;
 	
 	protected float vectorX;
 	protected float vectorY;
@@ -22,8 +28,15 @@ public class BasicUnit extends Sprite{
 	
 	public BasicUnit(BufferedImage image, float x, float y){
 		this.image =  image;
-		this.width = image.getWidth();
-		this.height = image.getHeight();
+		numberAnimations = 1;
+		numberFrames = 6;
+		currentAnimation = 0;
+		currentFrame = 0;
+		timeBetweenFrame = 60;
+		timerAnimation = 0;
+		
+		this.width = image.getWidth()/numberFrames;
+		this.height = image.getHeight()/numberAnimations;
 		this.radius = width/2;
 		
 		this.x = x;
@@ -50,13 +63,23 @@ public class BasicUnit extends Sprite{
 			calculateIA(difTime);
 		}
 		
+		/*update animation*/
+		timerAnimation+=difTime;
+		if(timerAnimation>timeBetweenFrame){
+			timerAnimation -= timeBetweenFrame;
+			
+			currentFrame++;
+			if(currentFrame>numberFrames)
+				currentFrame=0;
+		}
+		
         x += vectorX*(difTime/1000f);
         y += vectorY*(difTime/1000f);
 	}
 
 	@Override
 	public void render(Graphics2D graphics) {
-		graphics.drawImage(image, (int)x, (int)y, width, height, null);
+		graphics.drawImage(image, (int)x, (int)y, (int)(x+width), (int)(y+height), currentFrame*width, currentAnimation*height, (currentFrame*width)+width, (currentAnimation*height)+height, null);
 	}
 	
 	public void renderFocus(Graphics2D graphics){

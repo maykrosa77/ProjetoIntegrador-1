@@ -1,5 +1,6 @@
 package ProjetoIntegrador;
 
+import Manager.Language;
 import Scenes.Scene;
 import Scenes.MenuScene;
 import java.awt.Color;
@@ -49,8 +50,27 @@ public class GamePanel extends JPanel implements Runnable {
     * Add listeners and set scene.
     */
     public GamePanel() {
-        /*JPanel parameters.*/
-        setBackground(Color.white);
+        /*Init first scene.*/
+        Language.loadLanguage(Language.ENGLISH);
+        currentScene = new MenuScene(this);
+        
+        prepareFrame();
+        
+        /*Create and manager imputs.*/
+        listener();
+        
+        /*Create and set font configurations.*/
+        font = new Font("PAPYRUS", Font.BOLD, 12);
+        graphics.setFont(font);
+    }
+    
+    public void prepareFrame(){
+    	currentScene.width = widthScreen;
+    	currentScene.height = heightScreen;
+    	
+    	bufferImage = null;
+    	
+    	setBackground(Color.white);
         setPreferredSize(new Dimension(widthScreen, heightScreen));
         setFocusable(true);
         requestFocus(); /* JPanel now receives key events.*/
@@ -65,16 +85,6 @@ public class GamePanel extends JPanel implements Runnable {
                 graphics = (Graphics2D)bufferImage.getGraphics();
             }
         }
-        
-        /*Create and set font configurations.*/
-        font = new Font("Serif", Font.BOLD, 12);
-        graphics.setFont(font);
-
-        /*Init first scene.*/
-        currentScene = new MenuScene(this, widthScreen, heightScreen);
-        
-        /*Create and manager imputs.*/
-        listener();
     }
     
     /** 
