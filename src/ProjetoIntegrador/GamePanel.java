@@ -1,6 +1,7 @@
 package ProjetoIntegrador;
 
 import Manager.Language;
+import Scenes.GamePlayScene;
 import Scenes.Scene;
 import Scenes.MenuScene;
 import java.awt.Color;
@@ -53,6 +54,7 @@ public class GamePanel extends JPanel implements Runnable {
         /*Init first scene.*/
         Language.loadLanguage(Language.ENGLISH);
         currentScene = new MenuScene(this);
+//        currentScene = new GamePlayScene(this, new int[]{0,0,0,0,0,0}, new int[]{30,30});
         
         prepareFrame();
         

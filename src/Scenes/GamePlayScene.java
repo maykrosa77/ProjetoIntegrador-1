@@ -1,6 +1,7 @@
 package Scenes;
 
 import Manager.Image;
+import Manager.StageImport;
 import Objects.Battlefield;
 import Objects.Map;
 import Objects.Player;
@@ -36,7 +37,7 @@ public class GamePlayScene extends Scene{
     * @param int width of screen
     * @param int height of screen
     */
-    public GamePlayScene(GamePanel gamePanel){
+    public GamePlayScene(GamePanel gamePanel, int[] units, int[] commanders){
        this.gamePanel = gamePanel;
        this.width  = GamePanel.widthScreen;
        this.height = GamePanel.heightScreen;
@@ -44,25 +45,11 @@ public class GamePlayScene extends Scene{
        this.font = gamePanel.font;
        
        /*Positions bases and battlefields in map.*/
-       int[] cards = new int[6];
-       cards[0] = 0;
-       cards[1] = 0;
-       cards[2] = 0;
-       cards[3] = 0;
-       cards[4] = 0;
-       cards[5] = 0;
-       player = new Player(cards, this);
+       player = new Player(units, commanders, this);
        
        /*Positions bases and battlefields in map.*/
-       Rectangle2D[] bases = new Rectangle2D[2];
-       bases[0] = new Rectangle((int)(width*0.45f), (int)(height*0.85f), (int)(width*0.1f), (int)(height*0.1f));
-       bases[1] = new Rectangle((int)(width*0.45f), (int)(height*0.05f), (int)(width*0.1f), (int)(height*0.1f));
-		
-       Battlefield[] battlefields = new Battlefield[3];
-       battlefields[0] = new Battlefield(new Rectangle((int)(width*0.1f), (int)(height*0.45f), (int)(width*0.1f), (int)(height*0.1f)));
-       battlefields[1] = new Battlefield(new Rectangle((int)(width*0.5f), (int)(height*0.45f), (int)(width*0.1f), (int)(height*0.1f)));
-       battlefields[2] = new Battlefield(new Rectangle((int)(width*0.8f), (int)(height*0.45f), (int)(width*0.1f), (int)(height*0.1f)));
-       map = new Map(Image.terrain, 0, 0, bases, battlefields, this);
+       StageImport.loadStageFile("stage0.txt");
+       map = new Map(Image.terrain, 0, 0, StageImport.bases, StageImport.battlefields, this);
        
        random = new Random();
        ui = new UI(this);
@@ -85,7 +72,7 @@ public class GamePlayScene extends Scene{
     
     @Override
     public void mouseReleased(MouseEvent e) {
-    	/*Left Button*/
+    	/*Right Button*/
     	if(e.getButton() == 3){
 			for(int i=0; i<map.battlefields.length; i++){
 				if(map.battlefields[i].area.contains(e.getPoint())){	
@@ -101,7 +88,7 @@ public class GamePlayScene extends Scene{
 			}
     	}
     	
-    	/*Right Button*/
+    	/*Left Button*/
     	if(e.getButton() == 1){
     		if(ui.optionBox){
     			for(int i=0; i<ui.optionBoxArea.size(); i++){
@@ -112,10 +99,22 @@ public class GamePlayScene extends Scene{
     		}
     		
     		/*Click over cards to create news units*/
-			for(int i=0; i<ui.rectCards.length; i++){
-				if(ui.rectCards[i].contains(e.getPoint())){
-					player.createUnit(player.cards[i], random.nextInt((int)(width*0.1f))+(int)(width*0.45f), (int)(height*0.85f));
+			for(int i=0; i<ui.rectUnitsCards.length; i++){
+				if(ui.rectUnitsCards[i].contains(e.getPoint())){
+					ui.setUIText(player.units[i]);
 				}
+			}
+			
+    		/*Click over cards to create news commanders*/
+			for(int i=0; i<ui.rectCommandersCards.length; i++){
+				if(ui.rectCommandersCards[i].contains(e.getPoint())){
+					ui.setUIText(player.commanders[i]);
+				}
+			}
+			
+			/*Convene*/
+			if(ui.convene.contains(e.getPoint())){
+				player.createUnit(ui.cartasEscolhida, random.nextInt((int)(width*0.1f))+(int)(width*0.45f), (int)(height*0.85f));
 			}
 			
 			/*Send select squad to battlefield selected*/

@@ -146,7 +146,7 @@ public class DraftScene extends Scene{
 		
 		if(readyRect.contains(e.getPoint())){
 			if(readyToStart())
-				GamePanel.currentScene = new GamePlayScene(gamePanel);
+				GamePanel.currentScene = new GamePlayScene(gamePanel, unitsSelects, commanderSelects);
 			
 		}
 	}

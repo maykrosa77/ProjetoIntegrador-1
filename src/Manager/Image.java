@@ -16,9 +16,11 @@ import ProjetoIntegrador.StaticContent;
 */
 public class Image {
 
+	/*Scene background*/
     public static BufferedImage mainMenu = null;
     public static BufferedImage draftMenu = null;
     
+	/*UI elements*/
     public static BufferedImage[] languageIcons = null;
     public static BufferedImage[] sfxIcons = null;
     public static BufferedImage[] soundTrackIcons = null;
@@ -27,10 +29,12 @@ public class Image {
     public static BufferedImage arrowLeft = null;
     public static BufferedImage arrowRight = null;
     
+    public static BufferedImage footer = null;
+    public static BufferedImage convene = null;
+    
+    /*Gameplay elements*/
     public static BufferedImage terrain = null;
-    
     public static BufferedImage[] cards = null;
-    
     public static BufferedImage soldier = null;
     
     /**
@@ -57,13 +61,16 @@ public class Image {
             arrowLeft = ImageIO.read(new File(StaticContent.resourceDirectory+"ui"+StaticContent.separetor+"arrow_left.png"));
             arrowRight = ImageIO.read(new File(StaticContent.resourceDirectory+"ui"+StaticContent.separetor+"arrow_right.png"));
             
+            footer = ImageIO.read(new File(StaticContent.resourceDirectory+"ui"+StaticContent.separetor+"footer.png"));
+            convene = ImageIO.read(new File(StaticContent.resourceDirectory+"ui"+StaticContent.separetor+"convene.png"));
+            
             terrain =  ImageIO.read(new File(StaticContent.resourceDirectory+"terrain.png"));
             
             cards = new BufferedImage[40];
             for(int i=0; i<cards.length; i++)
             	cards[i] =  ImageIO.read(new File(StaticContent.resourceDirectory+"cards"+StaticContent.separetor+"card"+i+".png"));
             
-            soldier =  ImageIO.read(new File(StaticContent.resourceDirectory+"robot1.png"));
+            soldier =  ImageIO.read(new File(StaticContent.resourceDirectory+"sprite"+StaticContent.separetor+"robot1.png"));
         } catch (IOException e) {
             System.out.println("ERROR LOAD IMAGES");
         }

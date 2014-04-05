@@ -6,39 +6,57 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
-
 import Manager.Image;
+import Objects.Units.Scout;
 import Scenes.GamePlayScene;
 
 public class UI extends Sprite{
 
-	public Rectangle2D[] rectCards;
+	public Rectangle2D[] rectUnitsCards;
+	public Rectangle2D[] rectCommandersCards;
+	
+	public Rectangle convene;
 	
 	public ArrayList<Rectangle2D> optionBoxArea;
 	public ArrayList<String> optionBoxString;
 	public boolean optionBox;
 	public int optionBoxBattlefield;
 	
+	public int cartasEscolhida = 0;
+	
 	private GamePlayScene parent;
 	private Player player;
 	
+	private String namePrepared = "";
+	private int damagePrepared;
+	private int speedPrepared;
+	private float resistencePrepared;
+	private int coastPrepared;
+	private float buildPrepared;
 	
 	public UI(GamePlayScene parent){
 		this.parent = parent;
 		this.width = parent.width;
 		this.height = parent.height;
 		
-		player = parent.player;
+		player = GamePlayScene.player;
 		
 		optionBoxArea = new ArrayList<Rectangle2D>();
 		optionBoxString = new ArrayList<String>();
 		optionBox = false;
 		optionBoxBattlefield = -1;
 		
-		rectCards = new Rectangle2D[player.cards.length];
-        for(int i=0; i<rectCards.length; i++){
-        	rectCards[i] = new Rectangle(i*(int)(width*0.1f)+20, (int)(height*0.91f), (int)(width*0.05f), (int)(height*0.08f));
+		rectUnitsCards = new Rectangle2D[player.units.length];
+        for(int i=0; i<rectUnitsCards.length; i++){
+        	rectUnitsCards[i] = new Rectangle((i*(int)(width*0.05f))+(int)(width*0.01f), (int)(height*0.88f), (int)(width*0.04f), (int)(height*0.1f));
         }
+        
+        rectCommandersCards = new Rectangle2D[player.commanders.length];
+        for(int i=0; i<rectCommandersCards.length; i++){
+        	rectCommandersCards[i] = new Rectangle((i+rectUnitsCards.length+1)*(int)(width*0.05f)+(int)(width*0.01f), (int)(height*0.88f), (int)(width*0.04f), (int)(height*0.1f));
+        }
+        
+        convene = new Rectangle((int)(width*0.85f), (int)(height*0.93f), (int)(width*0.1f), (int)(height*0.06f));
 	}
 	
 	@Override
@@ -57,11 +75,14 @@ public class UI extends Sprite{
         graphics.drawString(""+(int)player.points, 20, 40);
         
     	/*Cards box*/
-        graphics.setColor(new Color(0, 0, 0, 150));
-        graphics.fillRect(0, (int)(height*0.9f), width, height);
+        graphics.drawImage(Image.footer, 0, (int)((height)-height*0.12f), width, (int)(height*0.12f), null);
         
-        for(int i=0; i<player.cards.length; i++){
-        	graphics.drawImage(Image.cards[player.cards[i]], (int)rectCards[i].getX(), (int)rectCards[i].getY(), (int)rectCards[i].getWidth(), (int)rectCards[i].getHeight(), null);
+        for(int i=0; i<player.units.length; i++){
+        	graphics.drawImage(Image.cards[player.units[i]], (int)rectUnitsCards[i].getX(), (int)rectUnitsCards[i].getY(), (int)rectUnitsCards[i].getWidth(), (int)rectUnitsCards[i].getHeight(), null);
+        }
+        
+        for(int i=0; i<player.commanders.length; i++){
+        	graphics.drawImage(Image.cards[player.commanders[i]], (int)rectCommandersCards[i].getX(), (int)rectCommandersCards[i].getY(), (int)rectCommandersCards[i].getWidth(), (int)rectCommandersCards[i].getHeight(), null);
         }
 
         if(optionBox){
@@ -73,6 +94,16 @@ public class UI extends Sprite{
         		graphics.drawString(optionBoxString.get(i), (int)optionBoxArea.get(i).getX(), (int)(optionBoxArea.get(i).getY()+optionBoxArea.get(i).getHeight()/2));
     		}
         }
+        
+        graphics.drawImage(Image.convene, (int)convene.getX(),   (int)convene.getY(),   (int)convene.getWidth(),   (int)convene.getHeight(), null);
+        
+        graphics.setColor(Color.WHITE);
+        graphics.drawString(namePrepared, (int)(width*0.5f), (int)(height*0.95f));
+        graphics.drawString(""+damagePrepared, (int)(width*0.55f), (int)(height*0.95f));
+        graphics.drawString(""+speedPrepared, (int)(width*0.6f), (int)(height*0.95f));
+        graphics.drawString(""+resistencePrepared, (int)(width*0.65f), (int)(height*0.95f));
+        graphics.drawString(""+coastPrepared, (int)(width*0.7f), (int)(height*0.95f));
+        graphics.drawString(""+buildPrepared, (int)(width*0.75f), (int)(height*0.95f));
 	}
 	
 	public void openActionBox(int battleFieldID){
@@ -85,5 +116,22 @@ public class UI extends Sprite{
        		optionBoxArea.add(new Rectangle((int)(rectArea.getX()+rectArea.getWidth()), (int)(rectArea.getY()+i*30), 100, 30));
        		optionBoxString.add(""+i);
        	}
+	}
+	
+	public void setUIText(int i){
+		cartasEscolhida = i;
+		
+		switch (i) {
+		case 0:
+			Scout.initAtributs();
+			namePrepared		=  Scout.name;
+			damagePrepared		= (Scout.meleeDamage+Scout.explosionDamage)/2;
+			speedPrepared 		= (Scout.moveSpeed+Scout.atackSpeed)/2;
+			resistencePrepared 	= (int) ((Scout.meleeResistance+Scout.explosionResistance)/2);
+			coastPrepared 		= Scout.coast;
+			buildPrepared 		= (int) Scout.buildTime;
+			break;
+		}
+		
 	}
 }

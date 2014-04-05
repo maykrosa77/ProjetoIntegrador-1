@@ -6,8 +6,19 @@ import java.awt.image.BufferedImage;
 import Objects.Sprite;
 
 public class BasicUnit extends Sprite{
-
-	public float speed;
+	
+	/*Atributs*/
+	public static String name;
+	public static String type;
+	
+	public static int meleeDamage;
+	public static int explosionDamage;
+	public static int atackSpeed;
+	public static int moveSpeed;
+	public static float meleeResistance;
+	public static float explosionResistance;
+	public static int coast;
+	public static float buildTime;
 	
 	public int stateIA;
 	public int battlefieldX;
@@ -44,7 +55,6 @@ public class BasicUnit extends Sprite{
 		
 		this.active = true;
 		
-		speed = 100;
 		vectorX = 0;
 		vectorY = 0;
 		
@@ -106,8 +116,8 @@ public class BasicUnit extends Sprite{
 				battlefieldY = 0;
 			}
 				
-            vectorX = (difX/moduleVector)*speed;
-            vectorY = (difY/moduleVector)*speed;
+            vectorX = (difX/moduleVector)*moveSpeed;
+            vectorY = (difY/moduleVector)*moveSpeed;
 		}
 	}
 	

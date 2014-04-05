@@ -19,6 +19,8 @@ public class Map extends Sprite{
 	public Rectangle2D[] bases;
 	public Battlefield[] battlefields;
 	
+	public int numberPaths;
+	
 	private Scene parent;
 	
 	private BufferedImage terrain;

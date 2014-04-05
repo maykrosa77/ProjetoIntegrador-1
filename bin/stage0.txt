@@ -1,0 +1,12 @@
+# Testing create state file 
+
+#Bases position
+qtd 2
+0.45, 0.9, 0.1, 0.1
+0.45, 0.0, 0.1, 0.1
+	
+#battlefields position
+qtd 3
+0.10, 0.4, 0.14, 0.2
+0.41, 0.4, 0.14, 0.2
+0.72, 0.4, 0.14, 0.2

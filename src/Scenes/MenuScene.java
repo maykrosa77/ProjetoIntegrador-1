@@ -3,6 +3,7 @@ package Scenes;
 import Manager.Image;
 import Manager.Language;
 import Manager.Sound;
+import Manager.StageImport;
 import ProjetoIntegrador.GamePanel;
 import java.awt.Color;
 import java.awt.Font;

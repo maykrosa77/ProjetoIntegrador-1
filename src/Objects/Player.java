@@ -3,14 +3,15 @@ package Objects;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import Manager.Image;
-import Objects.Units.Soldier;
+import Objects.Units.Scout;
 import ProjetoIntegrador.StaticContent;
 import Scenes.GamePlayScene;
 import Scenes.Scene;
 
 public class Player extends Sprite{
 
-	public int[] cards;
+	public int[] units;
+	public int[] commanders;
 	
 	public float gold;
 	public float points;
@@ -20,10 +21,11 @@ public class Player extends Sprite{
 	
 	private Scene parent;
 	
-	public Player(int[] cards, GamePlayScene parent){
+	public Player(int[] units, int[] commanders, GamePlayScene parent){
 		this.active = true;
 		
-		this.cards = cards;
+		this.units = units;
+		this.commanders = commanders;
 		
 		this.gold = StaticContent.goldBase;
 		this.points = 0;
@@ -64,7 +66,7 @@ public class Player extends Sprite{
 	public void createUnit(int i, float x, float y){
 		switch (i) {
 		case 0:
-			squads.get(squads.size()-1).units.add(new Soldier(Image.soldier, x, y));
+			squads.get(squads.size()-1).units.add(new Scout(Image.soldier, x, y));
 			break;
 		}
 		
