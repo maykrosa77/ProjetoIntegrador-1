@@ -53,7 +53,7 @@ public class StageImport {
 	            line = bufferedReader.readLine();
 	            subString = line.split(",");
 	            battlefields[i] = new Battlefield(new Rectangle((int)(GamePanel.widthScreen*Float.parseFloat(subString[0])),(int)(GamePanel.heightScreen* Float.parseFloat(subString[1])), 
-	            		(int)(GamePanel.widthScreen*Float.parseFloat(subString[2])), (int)(GamePanel.heightScreen*Float.parseFloat(subString[3]))));
+	            		(int)(GamePanel.widthScreen*Float.parseFloat(subString[2])), (int)(GamePanel.heightScreen*Float.parseFloat(subString[3]))), i);
             }
             
             bufferedReader.readLine();

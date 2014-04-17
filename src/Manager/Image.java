@@ -3,9 +3,7 @@ package Manager;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
-
 import ProjetoIntegrador.StaticContent;
 
 /**
@@ -35,16 +33,26 @@ public class Image {
     /*Gameplay elements*/
     public static BufferedImage terrain = null;
     public static BufferedImage[] cards = null;
-    public static BufferedImage soldier = null;
+    
+    public static BufferedImage flagDown = null;
+    public static BufferedImage flagHoistingG = null;
+    public static BufferedImage flagHoistingR = null;
+    public static BufferedImage flagHoistedG = null;
+    public static BufferedImage flagHoistedR = null;
+    
+    public static BufferedImage scoutG = null;
+    public static BufferedImage scoutR = null;
     
     /**
     * Init images statically.
     */
     static{
         try {
+        	/*Scene background*/
             mainMenu =  ImageIO.read(new File(StaticContent.resourceDirectory+"main_menu.png"));
             draftMenu =  ImageIO.read(new File(StaticContent.resourceDirectory+"draft_menu.png"));
-                        
+            
+        	/*UI elements*/
             languageIcons = new BufferedImage[2];
             languageIcons[0] = ImageIO.read(new File(StaticContent.resourceDirectory+"ui"+StaticContent.separetor+"english_flag.png"));
             languageIcons[1] = ImageIO.read(new File(StaticContent.resourceDirectory+"ui"+StaticContent.separetor+"portugues_flag.png"));
@@ -64,13 +72,21 @@ public class Image {
             footer = ImageIO.read(new File(StaticContent.resourceDirectory+"ui"+StaticContent.separetor+"footer.png"));
             convene = ImageIO.read(new File(StaticContent.resourceDirectory+"ui"+StaticContent.separetor+"convene.png"));
             
-            terrain =  ImageIO.read(new File(StaticContent.resourceDirectory+"terrain.png"));
+            /*Gameplay elements*/
+            terrain =  ImageIO.read(new File(StaticContent.resourceDirectory+"mapaBase.png"));
+            
+            flagDown      =  ImageIO.read(new File(StaticContent.resourceDirectory+"sprite"+StaticContent.separetor+"baseTorreNova.png"));
+            flagHoistingG =  ImageIO.read(new File(StaticContent.resourceDirectory+"sprite"+StaticContent.separetor+"AnimacaoTorreVerde.png"));
+            flagHoistingR =  ImageIO.read(new File(StaticContent.resourceDirectory+"sprite"+StaticContent.separetor+"AnimacaoTorreVermelha.png"));
+            flagHoistedG  =  ImageIO.read(new File(StaticContent.resourceDirectory+"sprite"+StaticContent.separetor+"spriteTorreVerdeVento.png"));
+            flagHoistedR  =  ImageIO.read(new File(StaticContent.resourceDirectory+"sprite"+StaticContent.separetor+"spriteTorreVermelhoVento.png"));
             
             cards = new BufferedImage[40];
             for(int i=0; i<cards.length; i++)
             	cards[i] =  ImageIO.read(new File(StaticContent.resourceDirectory+"cards"+StaticContent.separetor+"card"+i+".png"));
             
-            soldier =  ImageIO.read(new File(StaticContent.resourceDirectory+"sprite"+StaticContent.separetor+"robot1.png"));
+            scoutG =  ImageIO.read(new File(StaticContent.resourceDirectory+"sprite"+StaticContent.separetor+"spriteBatedorVerde.png"));
+            scoutR =  ImageIO.read(new File(StaticContent.resourceDirectory+"sprite"+StaticContent.separetor+"spriteBatedorVermelho.png"));
         } catch (IOException e) {
             System.out.println("ERROR LOAD IMAGES");
         }

@@ -5,6 +5,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.Random;
 
 import ProjetoIntegrador.GamePanel;
 
@@ -23,6 +24,8 @@ public abstract class Scene {
     
     public Font font;
     public FontMetrics fontMetrics;
+    
+    public Random random;
     
     public abstract void keyPressed(KeyEvent e);
     public abstract void keyReleased(KeyEvent e);

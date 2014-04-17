@@ -3,7 +3,10 @@ package Objects.Units;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+
+import IA.PathMove;
 import Objects.Sprite;
+import ProjetoIntegrador.GamePanel;
 
 public class BasicUnit extends Sprite{
 	
@@ -23,6 +26,10 @@ public class BasicUnit extends Sprite{
 	public int stateIA;
 	public int battlefieldX;
 	public int battlefieldY;
+	public PathMove pathMove;
+	public int currentPath;
+	
+	public int placeIDMap;
 	
 	protected BufferedImage image;
 	protected int numberAnimations;
@@ -37,9 +44,9 @@ public class BasicUnit extends Sprite{
 	
 	protected int timerIA;
 	
-	public BasicUnit(BufferedImage image, float x, float y){
+	public BasicUnit(BufferedImage image, float x, float y, int placeIDMap){
 		this.image =  image;
-		numberAnimations = 1;
+		numberAnimations = 4;
 		numberFrames = 6;
 		currentAnimation = 0;
 		currentFrame = 0;
@@ -61,6 +68,10 @@ public class BasicUnit extends Sprite{
 		stateIA = 0;
 		battlefieldX = 0;
 		battlefieldY = 0;
+		pathMove = null;
+		currentPath = -1;
+		
+		this.placeIDMap = placeIDMap;
 		
 		timerIA = 0;
 	}
@@ -111,9 +122,16 @@ public class BasicUnit extends Sprite{
             float moduleVector = (float)Math.sqrt((difX * difX)+(difY * difY));
             
 			if(moduleVector < 50){
-				stateIA = 0;
-				battlefieldX = 0;
-				battlefieldY = 0;
+				currentPath++;
+				if(currentPath >= pathMove.paths.size()){
+					currentFrame = -1;
+					stateIA = 0;
+					battlefieldX = 0;
+					battlefieldY = 0;
+				}else{
+					battlefieldX = (int)(GamePanel.widthScreen*pathMove.paths.get(currentPath).x);
+					battlefieldY = (int)(GamePanel.heightScreen*pathMove.paths.get(currentPath).y);
+				}
 			}
 				
             vectorX = (difX/moduleVector)*moveSpeed;
@@ -121,9 +139,11 @@ public class BasicUnit extends Sprite{
 		}
 	}
 	
-	public void goToObjetive(int x, int y){
+	public void goToObjetive(PathMove path){
 		stateIA = 1;
-		battlefieldX = x;
-		battlefieldY = y;
+		this.pathMove = path;
+		currentPath = 0;
+		battlefieldX = (int)(GamePanel.widthScreen*pathMove.paths.get(currentPath).x);
+		battlefieldY = (int)(GamePanel.heightScreen*pathMove.paths.get(currentPath).y);
 	}
 }

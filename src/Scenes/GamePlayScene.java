@@ -1,18 +1,16 @@
 package Scenes;
 
+import IA.PathMove;
 import Manager.Image;
 import Manager.StageImport;
-import Objects.Battlefield;
 import Objects.Map;
 import Objects.Player;
 import Objects.Squad;
 import Objects.UI;
 import ProjetoIntegrador.GamePanel;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Rectangle2D;
 import java.util.Random;
 
 /**
@@ -26,9 +24,8 @@ public class GamePlayScene extends Scene{
        
 	public static Player player;
 	public static Map map;
-	
+    
 	private UI ui;
-    private Random random;
     
     /** 
     * Constructor, init parameters of scene. 
@@ -49,7 +46,7 @@ public class GamePlayScene extends Scene{
        
        /*Positions bases and battlefields in map.*/
        StageImport.loadStageFile("stage0.txt");
-       map = new Map(Image.terrain, 0, 0, StageImport.bases, StageImport.battlefields, this);
+       map = new Map(Image.terrain, 0, 0, StageImport.bases, StageImport.battlefields, StageImport.pathMove, this);
        
        random = new Random();
        ui = new UI(this);
@@ -114,24 +111,36 @@ public class GamePlayScene extends Scene{
 			
 			/*Convene*/
 			if(ui.convene.contains(e.getPoint())){
-				player.createUnit(ui.cartasEscolhida, random.nextInt((int)(width*0.1f))+(int)(width*0.45f), (int)(height*0.85f));
+				/*Max units in one only squad*/
+				if(player.focusSquad.units.size() < 8)
+					player.createUnit(ui.cartasEscolhida, 1);
 			}
 			
 			/*Send select squad to battlefield selected*/
 			for(int i=0; i<map.battlefields.length; i++){
-				if(map.battlefields[i].area.contains(e.getPoint())){					
-					if(player.focusSquad.units.size() > 0){
-		    			player.focusSquad.goToBattleField(i);
-		    			
-		    			Squad s = new Squad(this);
-		       			player.squads.add(s);
-		       			player.focusSquad = s;
-		       			
-		       			if(ui.optionBox){
-							ui.optionBox = false;
-							ui.optionBoxArea.clear();
-							ui.optionBoxString.clear();
-		       			}
+				if(map.battlefields[i].area.contains(e.getPoint())){
+					/*Test if is valid position*/
+					boolean valid = false;
+					for(PathMove pm : Map.pathMove){
+						if(pm.origin == player.focusSquad.currentBattleField+2 && pm.destination == i+map.bases.length){
+							valid = true;
+						}
+					}
+					
+					if(valid){
+						if(player.focusSquad.units.size() > 0){
+			    			player.focusSquad.goToBattleField(i+map.bases.length);
+			    			
+			    			Squad s = new Squad(this);
+			       			player.squads.add(s);
+			       			player.focusSquad = s;
+			       			
+			       			if(ui.optionBox){
+								ui.optionBox = false;
+								ui.optionBoxArea.clear();
+								ui.optionBoxString.clear();
+			       			}
+						}
 					}
 				}
 			}

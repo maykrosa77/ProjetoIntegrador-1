@@ -6,8 +6,8 @@ import Manager.Language;
 
 public class Scout extends BasicUnit{
 	
-	public Scout(BufferedImage image, float x, float y){
-		super(image, x, y);
+	public Scout(BufferedImage image, float x, float y, int placeIDMap){
+		super(image, x, y, placeIDMap);
 	}
 	
 	public static void initAtributs(){

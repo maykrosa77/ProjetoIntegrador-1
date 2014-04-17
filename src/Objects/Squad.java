@@ -2,6 +2,8 @@ package Objects;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+
+import IA.PathMove;
 import Objects.Units.BasicUnit;
 import Scenes.GamePlayScene;
 
@@ -34,10 +36,23 @@ public class Squad{
 	}
 	
 	public void goToBattleField(int battleField){
-		currentBattleField = battleField;
+		currentBattleField = battleField-2;
 		
 		for(BasicUnit bu : units){
-			bu.goToObjetive((int)GamePlayScene.map.battlefields[currentBattleField].area.getX(), (int)GamePlayScene.map.battlefields[currentBattleField].area.getY());
+			PathMove pm = getPathMove(bu.placeIDMap, battleField);
+			if(pm != null){
+				bu.goToObjetive(pm);
+				bu.placeIDMap = battleField;
+			}
 		}
+	}
+	
+	private PathMove getPathMove(int currentPlace, int goingPlace){
+		for(PathMove pm : parent.map.pathMove){
+			if(pm.origin == currentPlace && pm.destination == goingPlace){
+				return pm;
+			}
+		}
+		return null;
 	}
 }

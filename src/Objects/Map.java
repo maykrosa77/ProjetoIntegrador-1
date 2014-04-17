@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
+import IA.PathMove;
 import Scenes.Scene;
 
 /**
@@ -18,6 +19,7 @@ public class Map extends Sprite{
 
 	public Rectangle2D[] bases;
 	public Battlefield[] battlefields;
+	public static PathMove []pathMove;
 	
 	public int numberPaths;
 	
@@ -35,7 +37,7 @@ public class Map extends Sprite{
     * @param Rectangle2D[] battlefields
     * @param Scene scene parent
     */
-	public Map(BufferedImage image, int x, int y, Rectangle2D[] bases, Battlefield[] battlefields, Scene parent){
+	public Map(BufferedImage image, int x, int y, Rectangle2D[] bases, Battlefield[] battlefields, PathMove []pathMove, Scene parent){
 		terrain =  image;
 		this.width = terrain.getWidth();
 		this.height = terrain.getHeight();
@@ -49,6 +51,7 @@ public class Map extends Sprite{
 		
 		this.bases = bases;
 		this.battlefields = battlefields;
+		this.pathMove = pathMove;
 	}
 	
     /** 
@@ -58,7 +61,8 @@ public class Map extends Sprite{
     */
     @Override
     public void update(int difTime) {
-
+		for(Battlefield b : battlefields)
+			b.update(difTime);
     }
 
     /** 
@@ -69,10 +73,6 @@ public class Map extends Sprite{
 	@Override
 	public void render(Graphics2D graphics) {
 		graphics.drawImage(terrain, 0, 0, parent.width, parent.height, null);
-		
-		graphics.setColor(Color.WHITE);
-		for(Rectangle2D b : bases)
-			graphics.fillRect((int)b.getX(), (int)b.getY(), (int)b.getWidth(), (int)b.getHeight());
 		
 		for(Battlefield b : battlefields)
 			b.render(graphics);

@@ -63,10 +63,15 @@ public class Player extends Sprite{
 		
 	}
 	
-	public void createUnit(int i, float x, float y){
+	public void createUnit(int i, int placeIDMap){
+		int unitsInSquad = GamePlayScene.player.focusSquad.units.size();
+		float x = parent.width*0.45f+(unitsInSquad%4)*parent.width*0.02f;
+		float y = unitsInSquad>=4?(int)(parent.height*0.87f):(int)(parent.height*0.85f);
+		
+		
 		switch (i) {
 		case 0:
-			squads.get(squads.size()-1).units.add(new Scout(Image.soldier, x, y));
+			squads.get(squads.size()-1).units.add(new Scout(Image.scoutG, x, y, placeIDMap));
 			break;
 		}
 		

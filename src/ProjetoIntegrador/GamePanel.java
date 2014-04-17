@@ -53,8 +53,8 @@ public class GamePanel extends JPanel implements Runnable {
     public GamePanel() {
         /*Init first scene.*/
         Language.loadLanguage(Language.ENGLISH);
-        currentScene = new MenuScene(this);
-//        currentScene = new GamePlayScene(this, new int[]{0,0,0,0,0,0}, new int[]{30,30});
+//        currentScene = new MenuScene(this);
+        currentScene = new GamePlayScene(this, new int[]{0,0,0,0,0,0}, new int[]{30,30});
         
         prepareFrame();
         
