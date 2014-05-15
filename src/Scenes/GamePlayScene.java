@@ -103,8 +103,7 @@ public class GamePlayScene extends Scene{
 			for(int i=0; i<ui.rectUnitsCards.length; i++){
 				if(ui.rectUnitsCards[i].contains(e.getPoint())){
 //					FIXME
-					ui.cartasEscolhida = player.units[i];
-//					ui.setUIText(player.units[i]);
+					ui.setUIText(player.units[i]);
 				}
 			}
 			
@@ -112,15 +111,14 @@ public class GamePlayScene extends Scene{
 			for(int i=0; i<ui.rectCommandersCards.length; i++){
 				if(ui.rectCommandersCards[i].contains(e.getPoint())){
 //					FIXME
-					ui.cartasEscolhida = player.commanders[i];
-//					ui.setUIText(player.commanders[i]);
+					ui.setUIText(player.commanders[i]);
 				}
 			}
 			
 			/*Convene*/
 			if(ui.convene.contains(e.getPoint())){
 				//TODO
-//				cpu.createUnit(0, 0);
+				cpu.createUnit(random.nextInt(10), 0);
 				/*Max units in one only squad*/
 				player.createUnit(ui.cartasEscolhida, 1);
 			}
