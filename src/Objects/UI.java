@@ -7,6 +7,16 @@ import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import Manager.Image;
+import Objects.Units.BarricadeTurtle;
+import Objects.Units.BigHead;
+import Objects.Units.CatchUp;
+import Objects.Units.Devastating;
+import Objects.Units.Doctor;
+import Objects.Units.HeavyArtillery;
+import Objects.Units.LightArtillery;
+import Objects.Units.LightInfantry;
+import Objects.Units.Rock;
+import Objects.Units.Roulette;
 import Objects.Units.Scout;
 import Scenes.GamePlayScene;
 
@@ -118,20 +128,111 @@ public class UI extends Sprite{
        	}
 	}
 	
-	public void setUIText(int i){
-		cartasEscolhida = i;
-		
-		switch (i) {
-		case 0:
-			Scout.initAtributs();
-			namePrepared		=  Scout.name;
-			damagePrepared		= (Scout.meleeDamage+Scout.explosionDamage)/2;
-			speedPrepared 		= (Scout.moveSpeed+Scout.atackSpeed)/2;
-			resistencePrepared 	= (int) ((Scout.meleeResistance+Scout.explosionResistance)/2);
-			coastPrepared 		= Scout.coast;
-			buildPrepared 		= (int) Scout.buildTime;
-			break;
-		}
-		
-	}
+//	FIXME
+//	public void setUIText(int i){
+//		cartasEscolhida = i;
+//		
+//		switch (i) {
+//		case 0:
+//			Scout.initAtributs();
+//			namePrepared		=  Scout.name;
+//			damagePrepared		= (Scout.meleeDamage+Scout.explosionDamage)/2;
+//			speedPrepared 		= (Scout.moveSpeed+Scout.atackSpeed)/2;
+//			resistencePrepared 	= (int) ((Scout.meleeResistance+Scout.explosionResistance)/2);
+//			coastPrepared 		= Scout.coast;
+//			buildPrepared 		= (int) Scout.buildTime;
+//			break;
+//		case 1:
+//			BarricadeTurtle.initAtributs();
+//			namePrepared		=  BarricadeTurtle.name;
+//			damagePrepared		= (BarricadeTurtle.meleeDamage+Scout.explosionDamage)/2;
+//			speedPrepared 		= (BarricadeTurtle.moveSpeed+Scout.atackSpeed)/2;
+//			resistencePrepared 	= (int) ((BarricadeTurtle.meleeResistance+Scout.explosionResistance)/2);
+//			coastPrepared 		= BarricadeTurtle.coast;
+//			buildPrepared 		= (int) BarricadeTurtle.buildTime;
+//			break;
+//		case 2:
+//			LightArtillery.initAtributs();
+//			namePrepared		=  LightArtillery.name;
+//			damagePrepared		= (LightArtillery.meleeDamage+Scout.explosionDamage)/2;
+//			speedPrepared 		= (LightArtillery.moveSpeed+Scout.atackSpeed)/2;
+//			resistencePrepared 	= (int) ((LightArtillery.meleeResistance+Scout.explosionResistance)/2);
+//			coastPrepared 		= LightArtillery.coast;
+//			buildPrepared 		= (int) LightArtillery.buildTime;
+//			break;
+//		case 3:
+//			HeavyArtillery.initAtributs();
+//			namePrepared		=  HeavyArtillery.name;
+//			damagePrepared		= (HeavyArtillery.meleeDamage+Scout.explosionDamage)/2;
+//			speedPrepared 		= (HeavyArtillery.moveSpeed+Scout.atackSpeed)/2;
+//			resistencePrepared 	= (int) ((HeavyArtillery.meleeResistance+Scout.explosionResistance)/2);
+//			coastPrepared 		= HeavyArtillery.coast;
+//			buildPrepared 		= (int) HeavyArtillery.buildTime;
+//			break;
+//		case 4:
+//			BigHead.initAtributs();
+//			namePrepared		=  BigHead.name;
+//			damagePrepared		= (BigHead.meleeDamage+Scout.explosionDamage)/2;
+//			speedPrepared 		= (BigHead.moveSpeed+Scout.atackSpeed)/2;
+//			resistencePrepared 	= (int) ((BigHead.meleeResistance+Scout.explosionResistance)/2);
+//			coastPrepared 		= BigHead.coast;
+//			buildPrepared 		= (int) BigHead.buildTime;
+//			break;
+//		case 5:
+//			LightInfantry.initAtributs();
+//			namePrepared		=  LightInfantry.name;
+//			damagePrepared		= (LightInfantry.meleeDamage+Scout.explosionDamage)/2;
+//			speedPrepared 		= (LightInfantry.moveSpeed+Scout.atackSpeed)/2;
+//			resistencePrepared 	= (int) ((LightInfantry.meleeResistance+Scout.explosionResistance)/2);
+//			coastPrepared 		= LightInfantry.coast;
+//			buildPrepared 		= (int) LightInfantry.buildTime;
+//			break;
+//		case 6:
+//			Roulette.initAtributs();
+//			namePrepared		=  Roulette.name;
+//			damagePrepared		= (Roulette.meleeDamage+Scout.explosionDamage)/2;
+//			speedPrepared 		= (Roulette.moveSpeed+Scout.atackSpeed)/2;
+//			resistencePrepared 	= (int) ((Roulette.meleeResistance+Scout.explosionResistance)/2);
+//			coastPrepared 		= Roulette.coast;
+//			buildPrepared 		= (int) Roulette.buildTime;
+//			break;
+//		case 7:
+//			Doctor.initAtributs();
+//			namePrepared		=  Doctor.name;
+//			damagePrepared		= (Doctor.meleeDamage+Scout.explosionDamage)/2;
+//			speedPrepared 		= (Doctor.moveSpeed+Scout.atackSpeed)/2;
+//			resistencePrepared 	= (int) ((Doctor.meleeResistance+Scout.explosionResistance)/2);
+//			coastPrepared 		= Doctor.coast;
+//			buildPrepared 		= (int) Doctor.buildTime;
+//			break;
+//		case 8:
+//			Devastating.initAtributs();
+//			namePrepared		=  Devastating.name;
+//			damagePrepared		= (Devastating.meleeDamage+Scout.explosionDamage)/2;
+//			speedPrepared 		= (Devastating.moveSpeed+Scout.atackSpeed)/2;
+//			resistencePrepared 	= (int) ((Devastating.meleeResistance+Scout.explosionResistance)/2);
+//			coastPrepared 		= Devastating.coast;
+//			buildPrepared 		= (int) Devastating.buildTime;
+//			break;
+//		case 9:
+//			CatchUp.initAtributs();
+//			namePrepared		=  CatchUp.name;
+//			damagePrepared		= (CatchUp.meleeDamage+Scout.explosionDamage)/2;
+//			speedPrepared 		= (CatchUp.moveSpeed+Scout.atackSpeed)/2;
+//			resistencePrepared 	= (int) ((CatchUp.meleeResistance+Scout.explosionResistance)/2);
+//			coastPrepared 		= CatchUp.coast;
+//			buildPrepared 		= (int) CatchUp.buildTime;
+//			break;
+//		case 10:
+//			Rock.initAtributs();
+//			namePrepared		=  Rock.name;
+//			damagePrepared		= (Rock.meleeDamage+Scout.explosionDamage)/2;
+//			speedPrepared 		= (Rock.moveSpeed+Scout.atackSpeed)/2;
+//			resistencePrepared 	= (int) ((Rock.meleeResistance+Scout.explosionResistance)/2);
+//			coastPrepared 		= Rock.coast;
+//			buildPrepared 		= (int) Rock.buildTime;
+//			break;
+//		}
+//		
+//	}
 }

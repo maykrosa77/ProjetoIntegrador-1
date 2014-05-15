@@ -3,6 +3,17 @@ package Objects;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import Manager.Image;
+import Objects.Units.BarricadeTurtle;
+import Objects.Units.BasicUnit;
+import Objects.Units.BigHead;
+import Objects.Units.CatchUp;
+import Objects.Units.Devastating;
+import Objects.Units.Doctor;
+import Objects.Units.HeavyArtillery;
+import Objects.Units.LightArtillery;
+import Objects.Units.LightInfantry;
+import Objects.Units.Rock;
+import Objects.Units.Roulette;
 import Objects.Units.Scout;
 import ProjetoIntegrador.StaticContent;
 import Scenes.GamePlayScene;
@@ -71,7 +82,81 @@ public class Player extends Sprite{
 		
 		switch (i) {
 		case 0:
-			squads.get(squads.size()-1).units.add(new Scout(Image.scoutG, x, y, placeIDMap));
+			Scout s = new Scout(Image.scoutG, x, y, 4, 6, placeIDMap, squads.get(squads.size()-1));
+			if(!approvedInsertion(s.coast))
+				return;
+			squads.get(squads.size()-1).units.add(s);
+			gold -= s.coast;
+			break;
+		case 1:
+			BarricadeTurtle b = new BarricadeTurtle(Image.barricadeTurtleG, x, y, 4, 8, placeIDMap, squads.get(squads.size()-1));
+			if(!approvedInsertion(b.coast))
+				return;
+			squads.get(squads.size()-1).units.add(b);
+			gold -= b.coast;
+			break;
+		case 2:
+			LightArtillery l = new LightArtillery(Image.LightArtilleryG, x, y, 4, 8, placeIDMap, squads.get(squads.size()-1));
+			if(!approvedInsertion(l.coast))
+				return;
+			squads.get(squads.size()-1).units.add(l);
+			gold -= l.coast;
+			break;
+		case 3:
+			HeavyArtillery h = new HeavyArtillery(Image.HeavyArtilleryG, x, y, 1, 1, placeIDMap, squads.get(squads.size()-1));
+			if(!approvedInsertion(h.coast))
+				return;
+			squads.get(squads.size()-1).units.add(h);
+			gold -= h.coast;
+			break;
+		case 4:
+			BigHead bh = new BigHead(Image.BigHeadG, x, y, 1, 1, placeIDMap, squads.get(squads.size()-1));
+			if(!approvedInsertion(bh.coast))
+				return;
+			squads.get(squads.size()-1).units.add(bh);
+			gold -= bh.coast;
+			break;
+		case 5:
+			LightInfantry li = new LightInfantry(Image.LightInfantryG, x, y, 1, 1, placeIDMap, squads.get(squads.size()-1));
+			if(!approvedInsertion(li.coast))
+				return;
+			squads.get(squads.size()-1).units.add(li);
+			gold -= li.coast;
+			break;
+		case 6:
+			Roulette r = new Roulette(Image.RouletteG, x, y, 1, 1, placeIDMap, squads.get(squads.size()-1));
+			if(!approvedInsertion(r.coast))
+				return;
+			squads.get(squads.size()-1).units.add(r);
+			gold -= r.coast;
+			break;
+		case 7:
+			Doctor dr = new Doctor(Image.DoctorG, x, y, 1, 1, placeIDMap, squads.get(squads.size()-1));
+			if(!approvedInsertion(dr.coast))
+				return;
+			squads.get(squads.size()-1).units.add(dr);
+			gold -= dr.coast;
+			break;
+		case 8:
+			Devastating dv = new Devastating(Image.DevastatingG, x, y, 1, 1, placeIDMap, squads.get(squads.size()-1));
+			if(!approvedInsertion(dv.coast))
+				return;
+			squads.get(squads.size()-1).units.add(dv);
+			gold -= dv.coast;
+			break;
+		case 9:
+			CatchUp cu = new CatchUp(Image.CatchUpG, x, y, 1, 1, placeIDMap, squads.get(squads.size()-1));
+			if(!approvedInsertion(cu.coast))
+				return;
+			squads.get(squads.size()-1).units.add(cu);
+			gold -= cu.coast;
+			break;
+		case 10:
+			Rock rock = new Rock(Image.RockG, x, y, 1, 1, placeIDMap, squads.get(squads.size()-1));
+			if(!approvedInsertion(rock.coast))
+				return;
+			squads.get(squads.size()-1).units.add(rock);
+			gold -= rock.coast;
 			break;
 		}
 		
@@ -87,5 +172,14 @@ public class Player extends Sprite{
 		}
 		
 		return squadsTemp;
+	}
+	
+	public boolean approvedInsertion(int coast){
+		if(focusSquad.units.size() >= 8)
+			return false;
+		if(coast > gold)
+			return false;
+		
+		return true;
 	}
 }

@@ -3,6 +3,7 @@ package Scenes;
 import IA.PathMove;
 import Manager.Image;
 import Manager.StageImport;
+import Objects.CPU;
 import Objects.Map;
 import Objects.Player;
 import Objects.Squad;
@@ -23,6 +24,8 @@ import java.util.Random;
 public class GamePlayScene extends Scene{
        
 	public static Player player;
+	public static CPU cpu;
+	
 	public static Map map;
     
 	private UI ui;
@@ -43,6 +46,7 @@ public class GamePlayScene extends Scene{
        
        /*Positions bases and battlefields in map.*/
        player = new Player(units, commanders, this);
+       cpu = new CPU(units, commanders, this);
        
        /*Positions bases and battlefields in map.*/
        StageImport.loadStageFile("stage0.txt");
@@ -98,22 +102,27 @@ public class GamePlayScene extends Scene{
     		/*Click over cards to create news units*/
 			for(int i=0; i<ui.rectUnitsCards.length; i++){
 				if(ui.rectUnitsCards[i].contains(e.getPoint())){
-					ui.setUIText(player.units[i]);
+//					FIXME
+					ui.cartasEscolhida = player.units[i];
+//					ui.setUIText(player.units[i]);
 				}
 			}
 			
     		/*Click over cards to create news commanders*/
 			for(int i=0; i<ui.rectCommandersCards.length; i++){
 				if(ui.rectCommandersCards[i].contains(e.getPoint())){
-					ui.setUIText(player.commanders[i]);
+//					FIXME
+					ui.cartasEscolhida = player.commanders[i];
+//					ui.setUIText(player.commanders[i]);
 				}
 			}
 			
 			/*Convene*/
 			if(ui.convene.contains(e.getPoint())){
+				//TODO
+//				cpu.createUnit(0, 0);
 				/*Max units in one only squad*/
-				if(player.focusSquad.units.size() < 8)
-					player.createUnit(ui.cartasEscolhida, 1);
+				player.createUnit(ui.cartasEscolhida, 1);
 			}
 			
 			/*Send select squad to battlefield selected*/
@@ -121,7 +130,7 @@ public class GamePlayScene extends Scene{
 				if(map.battlefields[i].area.contains(e.getPoint())){
 					/*Test if is valid position*/
 					boolean valid = false;
-					for(PathMove pm : Map.pathMove){
+					for(PathMove pm : map.pathMove){
 						if(pm.origin == player.focusSquad.currentBattleField+2 && pm.destination == i+map.bases.length){
 							valid = true;
 						}
@@ -153,6 +162,7 @@ public class GamePlayScene extends Scene{
     @Override
     public void mouseClicked(MouseEvent e) {}
         
+    int time = 0;
     /** 
     * Update objects of scene. 
     * 
@@ -160,7 +170,19 @@ public class GamePlayScene extends Scene{
     */
     @Override
     public void update(int difTime) {
+    	time+=difTime;
+    	if(time > 3000){
+    		time -= 3000;
+    		if(cpu.focusSquad.units.size() > 0){
+	    		cpu.focusSquad.goToBattleField(random.nextInt(2)+2);
+	    		
+				Squad s = new Squad(this);
+	   			cpu.squads.add(s);
+	   			cpu.focusSquad = s;
+    		}
+    	}
     	player.update(difTime);
+    	cpu.update(difTime);
     	map.update(difTime);
     	ui.update(difTime);
     }
@@ -174,6 +196,7 @@ public class GamePlayScene extends Scene{
     public void render(Graphics2D graphics) {    	
     	map.render(graphics);
     	player.render(graphics);
+    	cpu.render(graphics);
     	
     	ui.render(graphics);
     }

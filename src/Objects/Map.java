@@ -6,6 +6,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 import IA.PathMove;
+import Math.PVector;
 import Scenes.Scene;
 
 /**
@@ -19,7 +20,7 @@ public class Map extends Sprite{
 
 	public Rectangle2D[] bases;
 	public Battlefield[] battlefields;
-	public static PathMove []pathMove;
+	public PathMove []pathMove;
 	
 	public int numberPaths;
 	
@@ -43,8 +44,9 @@ public class Map extends Sprite{
 		this.height = terrain.getHeight();
 		this.radius = width/2;
 		
-		this.x = x;
-		this.y = y;
+		location = new PVector();
+		this.location.x = x;
+		this.location.y = y;
 		
 		this.active = true;
 		this.parent = parent;

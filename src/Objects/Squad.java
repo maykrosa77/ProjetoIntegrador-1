@@ -30,7 +30,7 @@ public class Squad{
 		for(int i=0; i<units.size(); i++)
 			units.get(i).render(graphics);
 		
-		if(this == parent.player.focusSquad)
+		if(this == GamePlayScene.player.focusSquad)
 			for(int i=0; i<units.size(); i++)
 				units.get(i).renderFocus(graphics);
 	}
@@ -48,7 +48,7 @@ public class Squad{
 	}
 	
 	private PathMove getPathMove(int currentPlace, int goingPlace){
-		for(PathMove pm : parent.map.pathMove){
+		for(PathMove pm : GamePlayScene.map.pathMove){
 			if(pm.origin == currentPlace && pm.destination == goingPlace){
 				return pm;
 			}

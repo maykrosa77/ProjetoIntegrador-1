@@ -1,6 +1,7 @@
 package Objects;
 
 import java.awt.Graphics2D;
+import Math.PVector;
 
 /**
 * Abstract class. Sprite is basic graphic element.
@@ -10,8 +11,7 @@ import java.awt.Graphics2D;
 */
 public abstract class Sprite {
 
-	public float x;
-	public float y;
+	public PVector location; 
 	public boolean active;
 
 	public int width;

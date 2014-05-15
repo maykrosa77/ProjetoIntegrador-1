@@ -1,5 +1,6 @@
 package ProjetoIntegrador;
 
+import Manager.Image;
 import Manager.Language;
 import Scenes.GamePlayScene;
 import Scenes.Scene;
@@ -26,7 +27,8 @@ import javax.swing.JPanel;
 * @version 1.0
 */
 public class GamePanel extends JPanel implements Runnable {
-
+	
+    public static GamePanel instance = null;
 	public static Scene currentScene = null;
     
     public static int widthScreen = 1280;
@@ -51,10 +53,13 @@ public class GamePanel extends JPanel implements Runnable {
     * Add listeners and set scene.
     */
     public GamePanel() {
+    	instance = this;
+    	
         /*Init first scene.*/
+    	new Image();
         Language.loadLanguage(Language.ENGLISH);
 //        currentScene = new MenuScene(this);
-        currentScene = new GamePlayScene(this, new int[]{0,0,0,0,0,0}, new int[]{30,30});
+        currentScene = new GamePlayScene(this, new int[]{0,1,2,3,4,5}, new int[]{30,30});
         
         prepareFrame();
         
